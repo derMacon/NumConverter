@@ -1,5 +1,7 @@
 # NumConverter
-Converter between different numeral systems. To execute the programm build or download [this](https://github.com/derMacon/NumConverter/blob/master/NumConverter.jar) jar and type `java -jar NumConverter.jar`
+Converter between different numeral systems. To execute the programm build or download [this](https://github.com/derMacon/NumConverter/blob/master/NumConverter.jar) jar and type 
+
+`java -jar NumConverter.jar`
 
 ### Usage
 ```
