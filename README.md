@@ -18,5 +18,5 @@ where
   fb - first base (base of the given input number)
   sb - second base (base of the numerical system from the target)
   b  - blocksize (minimum count of bits to display number)
-e.g. decimal to binary with blocksize 8-> 10 2 8: 
+e.g. decimal to binary with blocksize 8 -> 10 2 8: 
 ```
