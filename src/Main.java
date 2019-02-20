@@ -16,7 +16,6 @@ public class Main {
         Scanner in = new Scanner(System.in);
         System.out.println("Numerical converter V1.0\n" + USAGE);
 
-
         Mode mode = new Mode();
         String curr = null;
         while (userContinue) {
@@ -32,7 +31,7 @@ public class Main {
                     System.out.println(Converter.conv(curr, mode));
                 }
             } catch(RuntimeException e) {
-
+                System.out.println(USAGE);
             }
         }
 

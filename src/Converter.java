@@ -1,3 +1,6 @@
+/**
+ * Converts a number to another numerical system
+ */
 public class Converter {
 
     private static final String ERROR = "Invalid input";
