@@ -1,5 +1,5 @@
 # NumConverter
-Converter between different numeral systems. To execute the programm build or download [this](https://github.com/derMacon/NumConverter/blob/master/NumConverter.jar) jar and execute with terminal using following command: 
+Converter between different numeral systems. Is able to convert any system reaching from the binary system up to base36. To execute the programm build or download [this](https://github.com/derMacon/NumConverter/blob/master/NumConverter.jar) jar and execute with terminal using following command: 
 
 `java -jar NumConverter.jar`
 
