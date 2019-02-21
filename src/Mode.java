@@ -61,7 +61,7 @@ public class Mode {
 
     @Override
     public String toString() {
-        return getName(this.sourceBase) + " -> " + getName(this.targetBase) + (0 == this.blockSize ? "" :
+        return getName(this.sourceBase) + " -> " + getName(this.targetBase) + (1 >= this.blockSize ? "" :
                 " [BlockSize = " + this.blockSize + "]");
     }
 

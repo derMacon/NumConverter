@@ -25,7 +25,7 @@ public class Converter {
     private static String convFromDec(String dec, int base, int blockSize) {
         try {
             String output = convFromDec(Integer.parseInt(dec), base);
-            while (output.length() % blockSize > 0) {
+            while (output.isEmpty() || output.length() % blockSize > 0) {
                 output = 0 + output;
             }
             return output;
@@ -41,10 +41,28 @@ public class Converter {
      * @return converted number
      */
     public static String convFromDec(int dec, int base) {
-        if (0 == dec || 1 == dec) {
+        if(0 == dec) {
+            return "";
+        }
+        if (1 == dec) {
             return String.valueOf(dec);
         }
-        return convFromDec(dec / base, base) + dec % base;
+        return convFromDec(dec / base, base) + convDecToHex(dec % base, base);
+    }
+
+    /**
+     * Converts a given two digit decimal number into the a number of the numerical system of the given base. If base
+     * is greater the 10 the extra digits will start with the letter 'A' (see hexadecimal system).
+     * @param num number to convert
+     * @param base base of the target system
+     * @return converted number
+     */
+    public static char convDecToHex(int num, int base) {
+        if(num < 10 && num < base) {
+            return (char)(num + '0');
+        }
+        num -= 10; // generate offset to start with letters
+        return (char)('A' + num);
     }
 
     /**

@@ -6,7 +6,7 @@ public class Main {
             "- x to exit";
     private static final String EDIT_OPTIONS = "fb sb b\nwhere\n  fb - first base (base of the given input number)" +
             "\n  sb - second base (base of the numerical system from the target)\n  b  - blocksize (minimum count " +
-            "of bits to display number)\ne.g. decimal to binary with " +
+            "of digits to display number)\ne.g. decimal to binary with " +
             "blocksize 8-> " +
             "10 2 8: ";
 
@@ -22,15 +22,27 @@ public class Main {
             try {
                 System.out.print(mode + ": ");
                 curr = in.nextLine();
-                if (curr.toLowerCase().equals("x")) {
+                // user input longer than one word / number
+                if (!curr.matches(".*\\S")) {
+                    System.out.println(USAGE);
+                } else if (curr.toLowerCase().equals("x")) {
                     System.exit(0);
                 } else if (curr.toLowerCase().equals("e")) {
                     System.out.print(EDIT_OPTIONS);
-                    mode = Mode.genMode(in.nextLine());
+                    curr = in.nextLine();
+
+                    // todo regex for invalid user input
+//                    while (!curr.matches("[0-9]*\b[0-9]*\b[0-9]*")) {
+//                        System.out.print("Try again: ");
+//                        curr = in.nextLine();
+//                    }
+
+                    mode = Mode.genMode(curr);
                 } else {
+                    // actual conversion process
                     System.out.println(Converter.conv(curr, mode));
                 }
-            } catch(RuntimeException e) {
+            } catch (RuntimeException e) {
                 System.out.println(USAGE);
             }
         }
