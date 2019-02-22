@@ -67,4 +67,22 @@ public enum Alphabet {
     Alphabet(char representation) {
         this.representation = representation;
     }
+
+    public char getRepresentation() {
+        return representation;
+    }
+
+    public static Alphabet lookup(char c) throws InvalidNumException {
+        for(Alphabet curr : values()) {
+            if(curr.representation == c) {
+                return curr;
+            }
+        }
+        throw new InvalidNumException("No such element");
+    }
+
+    @Override
+    public String toString() {
+        return String.valueOf(this.representation);
+    }
 }

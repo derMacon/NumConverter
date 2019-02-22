@@ -14,13 +14,13 @@ public class Main {
     public static void main(String[] args) {
         boolean userContinue = true;
         Scanner in = new Scanner(System.in);
-        System.out.println("Numerical converter V1.0\n" + USAGE);
+        System.out.println("Numerical converter: binary - base62\n" + USAGE);
 
-        Mode mode = new Mode();
+        Converter c = new Converter(new Mode());
         String curr = null;
         while (userContinue) {
             try {
-                System.out.print(mode + ": ");
+                System.out.print(c.getMode() + ": ");
                 curr = in.nextLine();
                 // user input longer than one word / number
                 if (!curr.matches(".*\\S")) {
@@ -29,20 +29,12 @@ public class Main {
                     System.exit(0);
                 } else if (curr.toLowerCase().equals("e")) {
                     System.out.print(EDIT_OPTIONS);
-                    curr = in.nextLine();
-
-                    // todo regex for invalid user input
-//                    while (!curr.matches("[0-9]*\b[0-9]*\b[0-9]*")) {
-//                        System.out.print("Try again: ");
-//                        curr = in.nextLine();
-//                    }
-
-                    mode = Mode.genMode(curr);
+                    c.setMode(Mode.genMode(in.nextLine()));
                 } else {
                     // actual conversion process
-                    System.out.println(Converter.conv(curr, mode));
+                    System.out.println(c.conv(curr));
                 }
-            } catch (RuntimeException e) {
+            } catch (InvalidInputException e) {
                 System.out.println(USAGE);
             }
         }
