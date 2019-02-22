@@ -45,10 +45,12 @@ public class Converter2 {
      */
     private List<CharacterSet> convFromDec(int dec) {
         List<CharacterSet> output = new ArrayList<>();
+        // generate output num
         do {
             output.add(0, CharacterSetFactory.translate(dec % mode.getTargetBase(), mode.getTargetBase()));
             dec /= mode.getTargetBase();
         } while (dec > 0);
+        // fill up blocksize with zeros
         while (output.size() % mode.getBlockSize() > 0) {
             output.add(0, CharacterSetFactory.translate(0, mode.getTargetBase()));
         }
