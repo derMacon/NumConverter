@@ -77,11 +77,13 @@
                         <Insets left="10.0" />
                      </VBox.margin>
                   </Label>
-                  <JFXTreeTableView fx:id="tableResult" prefHeight="287.0" prefWidth="480.0" VBox.vgrow="ALWAYS">
-                     <VBox.margin>
-                        <Insets top="5.0" />
-                     </VBox.margin>
-                  </JFXTreeTableView>
+                  <TableView fx:id="tableResult" prefHeight="286.0" prefWidth="480.0">
+                     <columns>
+                        <TableColumn fx:id="firstNameCol" prefWidth="75.0" text="Column X" />
+                        <TableColumn fx:id="lastNameCol" prefWidth="75.0" text="Column X" />
+                        <TableColumn fx:id="emailCol" prefWidth="75.0" text="Column X" />
+                     </columns>
+                  </TableView>
                </children>
                <BorderPane.margin>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />

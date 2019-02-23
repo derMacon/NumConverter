@@ -1,21 +1,16 @@
 package javaFX;
 
-import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
-import com.jfoenix.controls.JFXListView;
 import com.jfoenix.controls.JFXPopup;
 import com.jfoenix.controls.JFXTextField;
-import com.jfoenix.controls.JFXTreeTableColumn;
-import com.jfoenix.controls.JFXTreeTableView;
-import com.jfoenix.controls.RecursiveTreeItem;
-import com.jfoenix.controls.datamodels.treetable.RecursiveTreeObject;
-import javafx.beans.property.StringProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.geometry.Insets;
-import javafx.scene.control.Label;
-import javafx.scene.control.TreeTableColumn;
-import javafx.scene.input.MouseEvent;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -27,9 +22,6 @@ public class FXMLNumConverterController implements Initializable {
     private JFXTextField txtFldBlock;
 
     @FXML
-    private JFXTreeTableView<?> tableResult;
-
-    @FXML
     private JFXComboBox<?> cmbBxTarget;
 
     @FXML
@@ -39,38 +31,96 @@ public class FXMLNumConverterController implements Initializable {
     private JFXComboBox<?> cmbBxSource;
 
     @FXML
+    private TableView<Result> tableResult;
+
+    @FXML
+    private TableColumn<Result, String> emailCol;
+
+    @FXML
+    private TableColumn<Result, String> firstNameCol;
+
+    @FXML
+    private TableColumn<Result, String> lastNameCol;
+
+    @FXML
     private JFXPopup pppSourceBase;
+
+    private final ObservableList<Result> data =
+            FXCollections.observableArrayList(
+                    new Result("Michael", "Brown", "michael.brown@example.com", "ad")
+            );
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        tableResult = new JFXTreeTableView<Result>();
-        tableResult.getColumns().setAll()
-        JFXTreeTableColumn
+
+        TableColumn srcBaseCol = new TableColumn("Source base");
+        TableColumn inputCol = new TableColumn("Input");
+        TableColumn trgtBaseCol = new TableColumn("Target base");
+        TableColumn  outputCol = new TableColumn("Output");
+
+        srcBaseCol.setCellValueFactory(
+                new PropertyValueFactory<Result,String>("srcBase")
+        );
+        inputCol.setCellValueFactory(
+                new PropertyValueFactory<Result,String>("lastName")
+        );
+        trgtBaseCol.setCellValueFactory(
+                new PropertyValueFactory<Result,String>("email")
+        );
+        outputCol.setCellValueFactory(
+                new PropertyValueFactory<Result,String>("email")
+        );
+
+        ObservableList<Result> res = FXCollections.observableArrayList(new Result("asdf", "asdf", "qwer", "qwerty"));
+
+        tableResult.setItems(res);
+        tableResult.getColumns().addAll(srcBaseCol, inputCol, trgtBaseCol, outputCol);
     }
 
+    public static class Result {
+        SimpleStringProperty srcBase;
+        SimpleStringProperty input;
+        SimpleStringProperty trgtBase;
+        SimpleStringProperty output;
 
+        public Result(String srcBase, String input, String trgtBase, String output) {
+            this.srcBase = new SimpleStringProperty(srcBase);
+            this.srcBase = new SimpleStringProperty(input);
+            this.srcBase = new SimpleStringProperty(trgtBase);
+            this.srcBase = new SimpleStringProperty(output);
+        }
 
-    private JFXTreeTableColumn<Result, String> genColumn(String name) {
-        JFXTreeTableColumn<Result, String> newColumn = new JFXTreeTableColumn<>("Age");
-        newColumn.setPrefWidth(150);
-        newColumn.setCellValueFactory((TreeTableColumn.CellDataFeatures<Result, String> param) -> {
-            if (newColumn.validateValue(param)) {
-                return param.getValue().getValue().age;
-            } else {
-                return newColumn.getComputedValue(param);
-            }
-        });
-        return newColumn;
-    }
+        public String getSrcBase() {
+            return srcBase.get();
+        }
 
+        public String getInput() {
+            return input.get();
+        }
 
+        public String getTrgtBase() {
+            return trgtBase.get();
+        }
 
+        public String getOutput() {
+            return output.get();
+        }
 
-    class Result extends RecursiveTreeObject<Result> {
-        StringProperty userName;
-        StringProperty age;
-        StringProperty department;
+        public void setSrcBase(String srcBase) {
+            this.srcBase.set(srcBase);
+        }
 
+        public void setInput(String input) {
+            this.input.set(input);
+        }
+
+        public void setTrgtBase(String trgtBase) {
+            this.trgtBase.set(trgtBase);
+        }
+
+        public void setOutput(String output) {
+            this.output.set(output);
+        }
     }
 
 
