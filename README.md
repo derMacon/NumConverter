@@ -1,12 +1,12 @@
 # NumConverter
 Converter between different numeral systems. Is able to convert any system reaching from the binary system up to base62. To execute the programm build or download one of the following jar files:
-- Headless: https://github.com/derMacon/NumConverter/blob/master/NumConverter.jar
+- Headless: https://github.com/derMacon/NumConverter/blob/feature/otherDocs/builds/NumConverterHeadless.jar
 - JavaFX Gui: todo insert link
 
  Execute it with the terminal using following command: 
 `java -jar [Name of the file].jar`
 
-### Usage
+### Usage (headless)
 ```
 Numerical converter
 - type a number to convert with given mode
@@ -14,7 +14,7 @@ Numerical converter
 - x to exit
 ```
 
-### Editing options
+### Editing options (headless)
 ```
 fb sb b
 where
@@ -24,7 +24,10 @@ where
 e.g. decimal to binary with blocksize 8 -> 10 2 8: 
 ```
 
-![alt text](https://github.com/derMacon/PS2ProgrammierPraktikum/blob/master/anhang/programmorganisationsplan/PP18Vereinfacht.png)
+### Current state of the gui: 
+<p align="indent">
+  <img src="https://github.com/derMacon/NumConverter/blob/feature/otherDocs/img/screenshot2302.png"/>
+</p>
 
 ### Credits (useful websites):
 - Two's complement: https://www.exploringbinary.com/twos-complement-converter/
