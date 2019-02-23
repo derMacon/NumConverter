@@ -14,7 +14,6 @@ public class JavaFXMain extends Application {
         Scene scene = new Scene(root);
         primaryStage.setScene(scene);
         primaryStage.setTitle("NumConverter");
-        primaryStage.setMaxHeight(500);
         primaryStage.show();
     }
 
