@@ -8,7 +8,6 @@ import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.VBox;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -164,15 +163,19 @@ public class FXMLNumConverterController implements Initializable {
         JFXButton btnBase62 = new JFXButton("Base62");
         btnBase4.setPadding(new Insets(10));
 
-        VBox vBox = new VBox(btnBase2, btnBase3, btnBase4, btnBase5, btnBase6, btnBase7, btnBase8, btnBase9
-                , btnBase10, btnBase11, btnBase12, btnBase13, btnBase14, btnBase15, btnBase16, btnBase17, btnBase18,
+        JFXButton[] arr = new JFXButton[]{btnBase2, btnBase3, btnBase4, btnBase5, btnBase6,
+                btnBase7, btnBase8, btnBase9, btnBase10, btnBase11, btnBase12, btnBase13, btnBase14, btnBase15,
+                btnBase16, btnBase17, btnBase18,
                 btnBase19, btnBase20, btnBase21, btnBase22, btnBase23, btnBase24, btnBase25, btnBase26, btnBase27,
                 btnBase28, btnBase29, btnBase30, btnBase31, btnBase32, btnBase33, btnBase34, btnBase35, btnBase36,
                 btnBase37, btnBase38, btnBase39, btnBase40, btnBase41, btnBase42, btnBase43, btnBase44, btnBase45,
                 btnBase46, btnBase47, btnBase48, btnBase49, btnBase50, btnBase51, btnBase52, btnBase53, btnBase54,
-                btnBase55, btnBase56, btnBase57, btnBase58, btnBase59, btnBase60, btnBase61, btnBase62);
+                btnBase55, btnBase56, btnBase57, btnBase58, btnBase59, btnBase60, btnBase61, btnBase62};
 
-        pppSourceBase.setContent(vBox);
+        JFXListView<JFXButton> lst = new JFXListView<JFXButton>();
+        lst.getItems().addAll(arr);
+
+        pppSourceBase.setContent(lst);
         pppSourceBase.setSource(lstVwSourceBase);
     }
 }
