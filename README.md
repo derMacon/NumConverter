@@ -5,7 +5,7 @@ Converter between different numeral systems. Is able to convert any system reach
 
 ### Usage
 ```
-Numerical converter V1.0
+Numerical converter
 - type a number to convert with given mode
 - e to edit the current mode
 - x to exit
