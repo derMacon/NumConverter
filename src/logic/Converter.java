@@ -1,3 +1,5 @@
+package logic;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -69,7 +71,7 @@ public class Converter {
      * @param num number to convert, is already splitted up into the different digits.
      * @return number in the target numeral system
      */
-    public List<Alphabet> convList(List<Alphabet> num) {
+    private List<Alphabet> convList(List<Alphabet> num) {
         return convFromDec(convToDec(num));
     }
 

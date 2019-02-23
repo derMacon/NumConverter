@@ -1,3 +1,6 @@
+import logic.Converter;
+import logic.InvalidNumException;
+import logic.Mode;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;

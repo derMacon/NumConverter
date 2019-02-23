@@ -1,3 +1,5 @@
+package logic;
+
 public enum Alphabet {
     zero('0'),
     one('1'),

@@ -1,3 +1,5 @@
+package logic;
+
 /**
  * Class to gather information about the mode of conversion. Used in the Converter to distinguish the source and
  * target numerical systems of the number.

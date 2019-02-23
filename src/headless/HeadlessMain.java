@@ -1,6 +1,12 @@
+package headless;
+
+import logic.Converter;
+import logic.InvalidInputException;
+import logic.Mode;
+
 import java.util.Scanner;
 
-public class Main {
+public class HeadlessMain {
 
     private static final String USAGE = "- type a number to convert with given mode\n- e to edit the current mode\n" +
             "- x to exit";
