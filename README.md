@@ -6,7 +6,7 @@ Converter between different numeral systems. Is able to convert any system reach
  Execute it with the terminal using following command: 
 `java -jar [Name of the file].jar`
 
-### Usage
+### Usage (headless)
 ```
 Numerical converter
 - type a number to convert with given mode
@@ -14,7 +14,7 @@ Numerical converter
 - x to exit
 ```
 
-### Editing options
+### Editing options (headless)
 ```
 fb sb b
 where
@@ -25,7 +25,7 @@ e.g. decimal to binary with blocksize 8 -> 10 2 8:
 ```
 
 ### Current state of the gui: 
-<p align="center">
+<p align="indent">
   <img src="https://github.com/derMacon/NumConverter/blob/feature/otherDocs/img/screenshot2302.png"/>
 </p>
 
