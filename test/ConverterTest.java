@@ -12,7 +12,7 @@ public class ConverterTest {
         assertEquals("00000001", c.conv("1"));
         assertEquals("00001010", c.conv("10"));
         assertEquals("11111111", c.conv("255"));
-        assertEquals("0000000100000000", c.conv("256"));
+        assertEquals("100000000", c.conv("256"));
     }
 
     @Test
@@ -56,6 +56,8 @@ public class ConverterTest {
     @Test
     public void testDecToBin_onlyNeg() throws InvalidNumException {
         Converter c = new Converter(new Mode(10, 2, 8));
+        assertEquals("100000001", c.conv("-255"));
+        assertEquals("100000000", c.conv("-256"));
         assertEquals("00000000", c.conv("-0"));
         assertEquals("11111111", c.conv("-1"));
         assertEquals("11111001", c.conv("-7"));
@@ -63,8 +65,6 @@ public class ConverterTest {
         assertEquals("11110110", c.conv("-10"));
         assertEquals("11110001", c.conv("-15"));
         assertEquals("11110000", c.conv("-16"));
-        assertEquals("100000001", c.conv("-255"));
-        assertEquals("100000000", c.conv("-256"));
     }
 
 }
