@@ -18,7 +18,7 @@ Numerical converter
 ```
 fb sb b
 where
-  fb - first base (base of the given input number)
+  fb - first base (base of the given inputRes number)
   sb - second base (base of the numerical system from the target)
   b  - blocksize (minimum count of digits to display number)
 e.g. decimal to binary with blocksize 8 -> 10 2 8: 

@@ -17,9 +17,15 @@ import java.util.ResourceBundle;
 
 public class FXMLNumConverterController implements Initializable {
 
+    private static final int DEFAULT_SRC_BASE = 10;
+    private static final int DEFAULT_BINARY_BASE = 2;
+    private static final int DEFAULT_BLOCKSIZE = 8;
 
     @FXML
     private JFXTextField txtFldBlock;
+
+    @FXML
+    private TableView<Result> tableResult;
 
     @FXML
     private JFXComboBox<?> cmbBxTarget;
@@ -31,18 +37,6 @@ public class FXMLNumConverterController implements Initializable {
     private JFXComboBox<?> cmbBxSource;
 
     @FXML
-    private TableView<Result> tableResult;
-
-    @FXML
-    private TableColumn<Result, String> emailCol;
-
-    @FXML
-    private TableColumn<Result, String> firstNameCol;
-
-    @FXML
-    private TableColumn<Result, String> lastNameCol;
-
-    @FXML
     private JFXPopup pppSourceBase;
 
     private final ObservableList<Result> data =
@@ -52,76 +46,40 @@ public class FXMLNumConverterController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        initTable();
+        this.txtFldBlock.setText(String.valueOf(DEFAULT_BLOCKSIZE));
+        this.txtFldBlock.set
 
+    }
+
+    private void initTable() {
         TableColumn srcBaseCol = new TableColumn("Source base");
         TableColumn inputCol = new TableColumn("Input");
         TableColumn trgtBaseCol = new TableColumn("Target base");
         TableColumn  outputCol = new TableColumn("Output");
 
+        srcBaseCol.setResizable(true);
+
         srcBaseCol.setCellValueFactory(
                 new PropertyValueFactory<Result,String>("srcBase")
         );
         inputCol.setCellValueFactory(
-                new PropertyValueFactory<Result,String>("lastName")
+                new PropertyValueFactory<Result,String>("InputRes")
         );
         trgtBaseCol.setCellValueFactory(
-                new PropertyValueFactory<Result,String>("email")
+                new PropertyValueFactory<Result,String>("targetBase")
         );
         outputCol.setCellValueFactory(
-                new PropertyValueFactory<Result,String>("email")
+                new PropertyValueFactory<Result,String>("output")
         );
 
-        ObservableList<Result> res = FXCollections.observableArrayList(new Result("asdf", "asdf", "qwer", "qwerty"));
+        ObservableList<Result> res = FXCollections.observableArrayList(new Result("asdf", ",,,,,", "qwer", "qwerty"));
 
         tableResult.setItems(res);
         tableResult.getColumns().addAll(srcBaseCol, inputCol, trgtBaseCol, outputCol);
     }
 
-    public static class Result {
-        SimpleStringProperty srcBase;
-        SimpleStringProperty input;
-        SimpleStringProperty trgtBase;
-        SimpleStringProperty output;
 
-        public Result(String srcBase, String input, String trgtBase, String output) {
-            this.srcBase = new SimpleStringProperty(srcBase);
-            this.srcBase = new SimpleStringProperty(input);
-            this.srcBase = new SimpleStringProperty(trgtBase);
-            this.srcBase = new SimpleStringProperty(output);
-        }
-
-        public String getSrcBase() {
-            return srcBase.get();
-        }
-
-        public String getInput() {
-            return input.get();
-        }
-
-        public String getTrgtBase() {
-            return trgtBase.get();
-        }
-
-        public String getOutput() {
-            return output.get();
-        }
-
-        public void setSrcBase(String srcBase) {
-            this.srcBase.set(srcBase);
-        }
-
-        public void setInput(String input) {
-            this.input.set(input);
-        }
-
-        public void setTrgtBase(String trgtBase) {
-            this.trgtBase.set(trgtBase);
-        }
-
-        public void setOutput(String output) {
-            this.output.set(output);
-        }
-    }
 
 
 
