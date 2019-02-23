@@ -23,6 +23,8 @@ where
   b  - blocksize (minimum count of digits to display number)
 e.g. decimal to binary with blocksize 8 -> 10 2 8: 
 ```
+
+### Current state of the gui: 
 <p align="center">
   <img src="https://github.com/derMacon/NumConverter/blob/feature/otherDocs/img/screenshot2302.png"/>
 </p>
