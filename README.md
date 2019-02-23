@@ -23,8 +23,9 @@ where
   b  - blocksize (minimum count of digits to display number)
 e.g. decimal to binary with blocksize 8 -> 10 2 8: 
 ```
-
-![alt text](https://github.com/derMacon/NumConverter/blob/feature/otherDocs/img/screenshot2302.png)
+<p align="center">
+  <img src="https://github.com/derMacon/NumConverter/blob/feature/otherDocs/img/screenshot2302.png"/>
+</p>
 
 ### Credits (useful websites):
 - Two's complement: https://www.exploringbinary.com/twos-complement-converter/
