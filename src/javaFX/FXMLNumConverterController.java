@@ -5,6 +5,7 @@ import com.jfoenix.controls.JFXPopup;
 import com.jfoenix.controls.JFXTextField;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
@@ -17,6 +18,11 @@ import logic.Converter;
 import logic.InvalidInputException;
 import logic.Mode;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.Writer;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -54,10 +60,9 @@ public class FXMLNumConverterController implements Initializable {
     /**
      * List of results generated during the programms runtime
      */
-    private final ObservableList<Result> data =
-            FXCollections.observableArrayList(
-                    new Result("Test src", "test input", "test target", "test output")
-            );
+    private final ObservableList<Result> data = FXCollections.observableArrayList();
+
+    private File file = new File("history.txt");
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -97,13 +102,15 @@ public class FXMLNumConverterController implements Initializable {
                 new PropertyValueFactory<Result, String>("output")
         );
 
-        // todo write perser for file
-        ObservableList<Result> fileOutput = FXCollections.observableArrayList(new Result("Test src",
+        // todo write parser for file
+        ObservableList<Result> fileOutput = FXCollections.observableArrayList(new Result("Test src2",
                 "test input", "test target", "test output"));
+        this.data.addAll(fileOutput);
 
         tableResult.setItems(fileOutput);
         tableResult.getColumns().addAll(srcBaseCol, inputCol, trgtBaseCol, outputCol);
     }
+
 
     /**
      * Initializes both combo boxes for the source / target numerical system.
@@ -124,8 +131,10 @@ public class FXMLNumConverterController implements Initializable {
     /**
      * Processes the given information provided by the user and generates a result which will be displayed in the
      * table view.
+     *
      * @param e Keyevent to distinguish between a normal input and the enter key
      */
+    @FXML
     public void calc(KeyEvent e) {
         try {
             if (e.getCode().equals(KeyCode.ENTER)) {
@@ -134,22 +143,38 @@ public class FXMLNumConverterController implements Initializable {
                 int blockSize = Integer.parseInt(removePrefix(this.txtFldBlock.getText()));
 
                 converter.setMode(new Mode(srcBase, trgtBase, blockSize));
-                data.add(new Result(this.cmbBxSource.getSelectionModel().getSelectedItem().getText(),
+                data.add(0, new Result(this.cmbBxSource.getSelectionModel().getSelectedItem().getText(),
                         this.txtFldInput.getText(), this.cmbBxTarget.getSelectionModel().getSelectedItem().getText(),
                         converter.conv(removePrefix(this.txtFldInput.getText()))));
-                System.out.println("refresh");
                 tableResult.getItems().setAll(data);
+
+                saveToFile(this.file, this.data);
             }
         } catch (InvalidInputException ex) {
             // todo
-        } catch(NullPointerException ex) {
+        } catch (NullPointerException ex) {
             // todo invalid base input (not selected)
         }
+    }
 
+    private void saveToFile(File file, ObservableList<Result> lst) {
+        StringBuilder lstString = new StringBuilder();
+        lstString.append(lst.get(0).getSrcBase() + ", ");
+        lstString.append(lst.get(0).getInputRes() + ", ");
+        lstString.append(lst.get(0).getTargetBase() + ", ");
+        lstString.append(lst.get(0).getOutput());
+
+        try (Writer outputStream = new BufferedWriter(new FileWriter(file, true))) {
+            outputStream.write(lstString+ "\n");
+        } catch (IOException e) {
+            System.out.println("error");
+            // todo
+        }
     }
 
     /**
      * Removes any kind prefixes used as constants
+     *
      * @param str String to remove the String from
      * @return String without a prefix
      * @throws NumberFormatException
@@ -164,4 +189,18 @@ public class FXMLNumConverterController implements Initializable {
         return temp;
     }
 
+    @FXML
+    void clearHistory(ActionEvent event) {
+
+    }
+
+    @FXML
+    void endProgramm(ActionEvent event) {
+        System.exit(0);
+    }
+
+    @FXML
+    void explainConversion(ActionEvent event) {
+
+    }
 }

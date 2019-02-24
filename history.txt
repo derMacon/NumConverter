@@ -1,0 +1,3 @@
+Base-10,   Input: 4, Base-2, 00000100
+Base-10,   Input: 4, Base-2, 00000100
+Base-10,   Input: 1, Base-2, 00000001
