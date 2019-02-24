@@ -6,7 +6,7 @@ package logic;
  */
 public class Mode {
     private final static int MIN_BASE = 2;
-    private final static int MAX_BASE = Alphabet.values().length;
+    public final static int MAX_BASE = Alphabet.values().length;
     private final static int SRC_BASE_IDX = 0;
     private final static int TRGT_BASE_IDX = 1;
     private final static int BLOCKSIZE_IDX = 2;
