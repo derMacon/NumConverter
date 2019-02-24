@@ -26,7 +26,7 @@ e.g. decimal to binary with blocksize 8 -> 10 2 8:
 
 ### Current state of the gui: 
 <p align="indent">
-  <img src="https://github.com/derMacon/NumConverter/blob/feature/otherDocs/img/screenshot2302.png"/>
+  <img src="https://github.com/derMacon/NumConverter/blob/feature/otherDocs/img/screenshot2402.png"/>
 </p>
 
 ### Credits (useful websites):
