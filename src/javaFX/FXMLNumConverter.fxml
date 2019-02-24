@@ -39,9 +39,7 @@
                <children>
                   <GridPane maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS">
                     <columnConstraints>
-                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="50.0" minWidth="50.0" prefWidth="50.0" />
                         <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="209.0" />
-                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="50.0" minWidth="50.0" prefWidth="50.0" />
                       <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="214.0" />
                     </columnConstraints>
                     <rowConstraints>
@@ -49,41 +47,44 @@
                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <JFXComboBox fx:id="cmbBxSource" prefHeight="25.0" prefWidth="171.0" promptText="Test" GridPane.columnIndex="1">
+                        <JFXComboBox fx:id="cmbBxSource" prefHeight="30.0" prefWidth="171.0" promptText="From: ">
+                           <GridPane.margin>
+                              <Insets left="8.0" right="8.0" />
+                           </GridPane.margin>
+                           <tooltip>
+                              <Tooltip text="Base of the input provided in the field below" />
+                           </tooltip>
+                        </JFXComboBox>
+                        <JFXComboBox fx:id="cmbBxTarget" prefHeight="30.0" prefWidth="193.0" promptText="To: " GridPane.columnIndex="1">
+                           <tooltip>
+                              <Tooltip text="Target base for the output" />
+                           </tooltip>
+                           <padding>
+                              <Insets right="8.0" />
+                           </padding>
                            <GridPane.margin>
                               <Insets left="8.0" right="8.0" />
                            </GridPane.margin>
                         </JFXComboBox>
-                        <JFXComboBox fx:id="cmbBxTarget" prefHeight="30.0" prefWidth="193.0" promptText="Test" GridPane.columnIndex="3">
-                           <padding>
-                              <Insets left="8.0" right="8.0" />
-                           </padding>
-                        </JFXComboBox>
-                        <JFXTextField fx:id="txtFldInput" text="Test" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                        <JFXTextField fx:id="txtFldBlock" depthTest="ENABLE" maxWidth="193.0" minWidth="77.0" prefHeight="31.0" prefWidth="77.0" text="Test" GridPane.columnIndex="3" GridPane.rowIndex="1" />
-                        <Label alignment="CENTER_RIGHT" prefHeight="17.0" prefWidth="39.0" text="From:" GridPane.halignment="CENTER">
-                           <tooltip>
-                              <Tooltip text="Base of the input provided in the field below" />
-                           </tooltip>
-                        </Label>
-                        <Label alignment="CENTER" prefHeight="17.0" prefWidth="29.0" text="To:" GridPane.columnIndex="2" GridPane.halignment="CENTER">
-                           <tooltip>
-                              <Tooltip text="Target base for the output" />
-                           </tooltip>
-                        </Label>
-                        <Label alignment="TOP_RIGHT" prefHeight="26.0" prefWidth="40.0" text="Block:" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
-                           <tooltip>
-                              <Tooltip text="Minimal digit count of the output (Blocksize). If necessary a prefix of zeros will be added." />
-                           </tooltip>
-                        </Label>
-                        <Label alignment="TOP_RIGHT" prefHeight="23.0" prefWidth="42.0" text="Input:" GridPane.halignment="CENTER" GridPane.rowIndex="1">
+                        <JFXTextField fx:id="txtFldInput" onKeyPressed="#calc" promptText="Input" GridPane.rowIndex="1">
                            <tooltip>
                               <Tooltip text="Number to convert." />
                            </tooltip>
-                        </Label>
+                           <GridPane.margin>
+                              <Insets left="3.0" />
+                           </GridPane.margin>
+                        </JFXTextField>
+                        <JFXTextField fx:id="txtFldBlock" depthTest="ENABLE" maxWidth="193.0" minWidth="77.0" prefHeight="31.0" prefWidth="77.0" promptText="Blocksize" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                           <tooltip>
+                              <Tooltip text="Minimal digit count of the output (Blocksize). If necessary a prefix of zeros will be added." />
+                           </tooltip>
+                           <GridPane.margin>
+                              <Insets left="3.0" right="8.0" />
+                           </GridPane.margin>
+                        </JFXTextField>
                      </children>
                   </GridPane>
-                  <Separator prefHeight="21.0" prefWidth="480.0">
+                  <Separator prefHeight="21.0" prefWidth="529.0">
                      <VBox.margin>
                         <Insets top="5.0" />
                      </VBox.margin>
