@@ -4,7 +4,10 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
+
+import java.io.File;
 
 public class JavaFXMain extends Application {
 
@@ -19,6 +22,7 @@ public class JavaFXMain extends Application {
         primaryStage.setMaxWidth(500);
         primaryStage.setMinHeight(475);
         primaryStage.setMinWidth(330);
+        primaryStage.getIcons().add(new Image("javaFX" + File.separator + "converterIcon.png"));
         primaryStage.show();
     }
 

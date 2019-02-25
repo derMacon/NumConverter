@@ -19,6 +19,12 @@
                 <Menu mnemonicParsing="false" text="Edit">
                   <items>
                     <MenuItem mnemonicParsing="false" onAction="#clearHistory" text="Clear History" />
+                        <Menu mnemonicParsing="false" text="Theme">
+                          <items>
+                            <MenuItem mnemonicParsing="false" onAction="#displayDarkMode" text="Dark Mode" />
+                              <MenuItem mnemonicParsing="false" onAction="#displayLightMode" text="Light Mode" />
+                          </items>
+                        </Menu>
                     <MenuItem mnemonicParsing="false" onAction="#endProgramm" text="Close" />
                   </items>
                 </Menu>

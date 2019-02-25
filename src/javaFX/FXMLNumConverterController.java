@@ -4,7 +4,6 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.JFXDialogLayout;
-import com.jfoenix.controls.JFXPopup;
 import com.jfoenix.controls.JFXTextField;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -24,7 +23,6 @@ import javafx.scene.text.TextAlignment;
 import javafx.scene.text.TextFlow;
 import logic.Converter;
 import logic.InvalidInputException;
-import logic.InvalidNumException;
 import logic.Mode;
 
 import java.awt.*;
@@ -60,6 +58,7 @@ public class FXMLNumConverterController implements Initializable {
     private static final int DEFAULT_SRC_BASE = 10;
     private static final int DEFAULT_TARGET_BASE = 2;
     private static final int DEFAULT_BLOCKSIZE = 8;
+    private static final String DARK_MODE_CSS_TITLE = "jfoenixTheme.css";
 
     @FXML
     private JFXTextField txtFldBlock;
@@ -75,9 +74,6 @@ public class FXMLNumConverterController implements Initializable {
 
     @FXML
     private JFXComboBox<Label> cmbBxSource;
-
-    @FXML
-    private JFXPopup pppSourceBase;
 
     @FXML
     private StackPane stackPane;
@@ -97,7 +93,7 @@ public class FXMLNumConverterController implements Initializable {
         this.txtFldInput.requestFocus();
 
         initTable();
-        this.txtFldBlock.setText(BLOCK_PREFIX + String.valueOf(DEFAULT_BLOCKSIZE));
+        this.txtFldBlock.setText(BLOCK_PREFIX + DEFAULT_BLOCKSIZE);
         this.txtFldInput.setText(INPUT_PREFIX);
         initComboboxes();
         this.tableResult.setPlaceholder(new Label("empty history"));
@@ -138,6 +134,7 @@ public class FXMLNumConverterController implements Initializable {
 
     /**
      * Reads the content of the file attribut and generates a ObservableList objects containing Result objects.
+     *
      * @return a ObservableList objects containing Result objects.
      */
     private ObservableList<Result> readFile() {
@@ -192,7 +189,8 @@ public class FXMLNumConverterController implements Initializable {
 
                 converter.setMode(new Mode(srcBase, trgtBase, blockSize));
                 data.add(0, new Result(this.cmbBxSource.getSelectionModel().getSelectedItem().getText(),
-                        this.txtFldInput.getText(), this.cmbBxTarget.getSelectionModel().getSelectedItem().getText(),
+                        removePrefix(this.txtFldInput.getText()),
+                        this.cmbBxTarget.getSelectionModel().getSelectedItem().getText(),
                         converter.conv(removePrefix(this.txtFldInput.getText()))));
                 tableResult.getItems().setAll(data);
 
@@ -212,6 +210,11 @@ public class FXMLNumConverterController implements Initializable {
         showMessage("Description", TUTORIAL_DESCR);
     }
 
+    /**
+     * Opens a dialog window with the given title and message
+     * @param title title of the dialog window
+     * @param message message of the dialog window
+     */
     private void showMessage(String title, String message) {
         StackPane stackpane = this.stackPane;
 
@@ -234,11 +237,15 @@ public class FXMLNumConverterController implements Initializable {
         });
         button.setButtonType(com.jfoenix.controls.JFXButton.ButtonType.RAISED);
         button.setPrefHeight(32);
-//        button.setStyle(dialogBtnStyle);
         content.setActions(button);
         dialog.show();
     }
 
+    /**
+     * Saves the given list to the given file
+     * @param file file the list will be saved to
+     * @param lst list of Results to save
+     */
     private void saveToFile(File file, ObservableList<Result> lst) {
         StringBuilder lstString = new StringBuilder();
         lstString.append(lst.get(0).getSrcBase() + ", ");
@@ -310,5 +317,15 @@ public class FXMLNumConverterController implements Initializable {
         } catch (IOException | URISyntaxException e) {
             showMessage("Error", e.getMessage());
         }
+    }
+
+    @FXML
+    public void displayDarkMode(ActionEvent event) {
+        this.txtFldBlock.getScene().getStylesheets().add(DARK_MODE_CSS_TITLE);
+    }
+
+    @FXML
+    public void displayLightMode(ActionEvent event) {
+        this.txtFldBlock.getScene().getStylesheets().removeAll(DARK_MODE_CSS_TITLE);
     }
 }
