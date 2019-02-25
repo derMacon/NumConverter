@@ -72,7 +72,7 @@
                               <Insets left="3.0" />
                            </GridPane.margin>
                         </JFXTextField>
-                        <JFXTextField fx:id="txtFldBlock" depthTest="ENABLE" maxWidth="193.0" minWidth="77.0" prefHeight="31.0" prefWidth="1000.0" promptText="Blocksize" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                        <JFXTextField fx:id="txtFldBlock" depthTest="ENABLE" maxWidth="1000.0" minWidth="77.0" prefHeight="31.0" prefWidth="1000.0" promptText="Blocksize" GridPane.columnIndex="1" GridPane.rowIndex="1">
                            <tooltip>
                               <Tooltip text="Minimal digit count of the output (Blocksize). If necessary a prefix of zeros will be added." />
                            </tooltip>
@@ -82,24 +82,36 @@
                         </JFXTextField>
                      </children>
                   </GridPane>
-                  <Separator prefHeight="21.0" prefWidth="529.0">
+                  <Separator prefHeight="21.0" prefWidth="240.0">
                      <VBox.margin>
                         <Insets top="5.0" />
                      </VBox.margin>
+                     <padding>
+                        <Insets left="10.0" right="16.0" />
+                     </padding>
                   </Separator>
-                  <Label prefHeight="25.0" prefWidth="40.0" text="Result:">
+                  <Label focusTraversable="false" prefHeight="25.0" prefWidth="56.0" text="Result:">
                      <VBox.margin>
                         <Insets left="10.0" />
                      </VBox.margin>
+                     <font>
+                        <Font size="14.0" />
+                     </font>
                   </Label>
                   <TableView fx:id="tableResult" prefHeight="282.0" prefWidth="295.0" VBox.vgrow="ALWAYS">
                      <columnResizePolicy>
                         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                      </columnResizePolicy>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                     <VBox.margin>
+                        <Insets top="5.0" />
+                     </VBox.margin>
                   </TableView>
                </children>
                <BorderPane.margin>
-                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                  <Insets bottom="10.0" left="10.0" right="8.0" top="10.0" />
                </BorderPane.margin>
             </VBox>
          </center>

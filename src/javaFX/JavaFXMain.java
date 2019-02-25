@@ -13,9 +13,12 @@ public class JavaFXMain extends Application {
         Parent root = FXMLLoader.load(getClass().getResource("FXMLNumConverter.fxml"));
         Scene scene = new Scene(root);
         scene.getStylesheets().add("jfoenixTheme.css");
-//        scene.getStylesheets().add("tableViewTheme.css");
         primaryStage.setScene(scene);
         primaryStage.setTitle("NumConverter");
+        primaryStage.setMaxHeight(800);
+        primaryStage.setMaxWidth(500);
+        primaryStage.setMinHeight(475);
+        primaryStage.setMinWidth(330);
         primaryStage.show();
     }
 
