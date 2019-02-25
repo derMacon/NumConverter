@@ -1,0 +1,41 @@
+/*
+ *	Apply google Roboto font to all UI components
+ */
+
+{
+    -fx-primary: #222222
+;
+    -fx-secondary: #005bf3
+;
+    -fx-primarytext: #c6c6c6
+;
+}
+
+.background {
+    -fx-background-color: #f30015;
+}
+
+.root {
+    /*-fx-font-family: "Roboto";
+    -fx-font-smoothing-type: gray;
+    -fx-font-size: 13.0; */
+    -fx-background-color: -fx-primary;
+
+}
+
+.label {
+    -fx-text-fill: -fx-primarytext;
+}
+
+.text-field {
+    -fx-text-fill: -fx-primarytext;
+}
+
+.table-view {
+    -fx-background-color: -fx-primary;
+}
+
+.separator {
+    -fx-fill: -fx-secondary;
+}
+

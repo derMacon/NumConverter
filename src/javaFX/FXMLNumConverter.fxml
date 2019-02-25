@@ -10,9 +10,9 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane maxHeight="500.0" prefHeight="468.0" prefWidth="315.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javaFX.FXMLNumConverterController">
+<AnchorPane fx:id="aPnBasePane" maxHeight="500.0" prefHeight="468.0" prefWidth="315.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javaFX.FXMLNumConverterController">
    <children>
-      <BorderPane prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <BorderPane fx:id="bPnBasePane" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <top>
             <MenuBar BorderPane.alignment="CENTER">
               <menus>
@@ -24,8 +24,9 @@
                 </Menu>
                 <Menu mnemonicParsing="false" text="Help">
                   <items>
+                        <MenuItem mnemonicParsing="false" onAction="#showTutorial" text="Description" />
                         <MenuItem fx:id="mnTmAbout1" mnemonicParsing="false" onAction="#explainConversion" text="How does this work?" />
-                    <MenuItem fx:id="mnTmRepo" mnemonicParsing="false" text="Repository (Github)" />
+                    <MenuItem mnemonicParsing="false" onAction="#openRepo" text="Repository (Github)" />
                   </items>
                 </Menu>
               </menus>
@@ -34,7 +35,7 @@
          <center>
             <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
                <children>
-                  <GridPane maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS">
+                  <GridPane maxHeight="80.0" maxWidth="1.7976931348623157E308" minHeight="80.0" prefHeight="80.0" prefWidth="295.0" VBox.vgrow="NEVER">
                     <columnConstraints>
                         <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="209.0" />
                       <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="214.0" />
@@ -44,7 +45,7 @@
                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <JFXComboBox fx:id="cmbBxSource" prefHeight="30.0" prefWidth="171.0" promptText="From: ">
+                        <JFXComboBox fx:id="cmbBxSource" prefHeight="30.0" prefWidth="1000.0" promptText="From: ">
                            <GridPane.margin>
                               <Insets left="8.0" right="8.0" />
                            </GridPane.margin>
@@ -52,7 +53,7 @@
                               <Tooltip text="Base of the input provided in the field below" />
                            </tooltip>
                         </JFXComboBox>
-                        <JFXComboBox fx:id="cmbBxTarget" prefHeight="30.0" prefWidth="193.0" promptText="To: " GridPane.columnIndex="1">
+                        <JFXComboBox fx:id="cmbBxTarget" prefHeight="30.0" prefWidth="1000.0" promptText="To: " GridPane.columnIndex="1">
                            <tooltip>
                               <Tooltip text="Target base for the output" />
                            </tooltip>
@@ -63,7 +64,7 @@
                               <Insets left="8.0" right="8.0" />
                            </GridPane.margin>
                         </JFXComboBox>
-                        <JFXTextField fx:id="txtFldInput" onKeyPressed="#calc" promptText="Input" GridPane.rowIndex="1">
+                        <JFXTextField fx:id="txtFldInput" onKeyPressed="#calc" prefWidth="1000.0" promptText="Input" GridPane.rowIndex="1">
                            <tooltip>
                               <Tooltip text="Number to convert." />
                            </tooltip>
@@ -71,7 +72,7 @@
                               <Insets left="3.0" />
                            </GridPane.margin>
                         </JFXTextField>
-                        <JFXTextField fx:id="txtFldBlock" depthTest="ENABLE" maxWidth="193.0" minWidth="77.0" prefHeight="31.0" prefWidth="77.0" promptText="Blocksize" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                        <JFXTextField fx:id="txtFldBlock" depthTest="ENABLE" maxWidth="193.0" minWidth="77.0" prefHeight="31.0" prefWidth="1000.0" promptText="Blocksize" GridPane.columnIndex="1" GridPane.rowIndex="1">
                            <tooltip>
                               <Tooltip text="Minimal digit count of the output (Blocksize). If necessary a prefix of zeros will be added." />
                            </tooltip>
@@ -91,7 +92,7 @@
                         <Insets left="10.0" />
                      </VBox.margin>
                   </Label>
-                  <TableView fx:id="tableResult" prefHeight="286.0" prefWidth="480.0">
+                  <TableView fx:id="tableResult" prefHeight="282.0" prefWidth="295.0" VBox.vgrow="ALWAYS">
                      <columnResizePolicy>
                         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                      </columnResizePolicy>
@@ -104,5 +105,6 @@
          </center>
       </BorderPane>
       <JFXPopup fx:id="pppSourceBase" />
+      <StackPane fx:id="stackPane" disable="true" layoutX="15.0" layoutY="84.0" prefHeight="468.0" prefWidth="315.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
    </children>
 </AnchorPane>

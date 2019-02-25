@@ -12,6 +12,8 @@ public class JavaFXMain extends Application {
     public void start(Stage primaryStage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("FXMLNumConverter.fxml"));
         Scene scene = new Scene(root);
+        scene.getStylesheets().add("jfoenixTheme.css");
+//        scene.getStylesheets().add("tableViewTheme.css");
         primaryStage.setScene(scene);
         primaryStage.setTitle("NumConverter");
         primaryStage.show();

@@ -2,6 +2,10 @@ package javaFX;
 
 import javafx.beans.property.SimpleStringProperty;
 
+/**
+ * Class needed for the TableView. This fx component works with reflections and it's necessary to implement the
+ * Getters for this class, because these are the only interface with the tableView itself.
+ */
 public class Result {
     SimpleStringProperty srcBase;
     SimpleStringProperty inputRes;

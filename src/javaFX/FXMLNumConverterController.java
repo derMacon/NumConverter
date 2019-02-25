@@ -1,11 +1,15 @@
 package javaFX;
 
+import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
+import com.jfoenix.controls.JFXDialog;
+import com.jfoenix.controls.JFXDialogLayout;
 import com.jfoenix.controls.JFXPopup;
 import com.jfoenix.controls.JFXTextField;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
@@ -14,15 +18,27 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.StackPane;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextAlignment;
+import javafx.scene.text.TextFlow;
 import logic.Converter;
 import logic.InvalidInputException;
+import logic.InvalidNumException;
 import logic.Mode;
 
+import java.awt.*;
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.io.Writer;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -30,8 +46,16 @@ import java.util.ResourceBundle;
  * Class that handles every gui interaction with the user.
  */
 public class FXMLNumConverterController implements Initializable {
-    private static final String INPUT_PREFIX = "  Input: ";
-    private static final String BLOCK_PREFIX = "  Blocksize: ";
+    private static final String INPUT_PREFIX = "   Input: ";
+    private static final String BLOCK_PREFIX = "   Blocksize: ";
+    private static final String TUTORIAL_DESCR = "Before you start to convert a number the source as well as the " +
+            "target base must be declared in both drop down menus. Now you may type in the number to convert. The " +
+            "Block panel states the minimal digit count of the output in the respective numeral system.\n\nExample, " +
+            "converting the number 1 from the decimal system to binary: source base = 10, target base = 2, block = 8 " +
+            "(does not really matter, since it is the minimal digit count), typing enter in the input field will " +
+            "start the conversion process.\n\nWhen hovering over the the fields, a small description will pop up. " +
+            "This " +
+            "description is also available under the 'help' tag.";
 
     private static final int DEFAULT_SRC_BASE = 10;
     private static final int DEFAULT_TARGET_BASE = 2;
@@ -55,6 +79,9 @@ public class FXMLNumConverterController implements Initializable {
     @FXML
     private JFXPopup pppSourceBase;
 
+    @FXML
+    private StackPane stackPane;
+
     private Converter converter;
 
     /**
@@ -73,13 +100,13 @@ public class FXMLNumConverterController implements Initializable {
         this.txtFldBlock.setText(BLOCK_PREFIX + String.valueOf(DEFAULT_BLOCKSIZE));
         this.txtFldInput.setText(INPUT_PREFIX);
         initComboboxes();
+        this.tableResult.setPlaceholder(new Label("empty history"));
 
         this.converter = new Converter(new Mode(DEFAULT_SRC_BASE, DEFAULT_TARGET_BASE, DEFAULT_BLOCKSIZE));
     }
 
     /**
      * Initializes the table with a given file input
-     * // todo implement file input
      */
     private void initTable() {
         TableColumn srcBaseCol = new TableColumn("Source base");
@@ -102,13 +129,34 @@ public class FXMLNumConverterController implements Initializable {
                 new PropertyValueFactory<Result, String>("output")
         );
 
-        // todo write parser for file
-        ObservableList<Result> fileOutput = FXCollections.observableArrayList(new Result("Test src2",
-                "test input", "test target", "test output"));
+        ObservableList<Result> fileOutput = readFile();
         this.data.addAll(fileOutput);
 
         tableResult.setItems(fileOutput);
         tableResult.getColumns().addAll(srcBaseCol, inputCol, trgtBaseCol, outputCol);
+    }
+
+    /**
+     * Reads the content of the file attribut and generates a ObservableList objects containing Result objects.
+     * @return a ObservableList objects containing Result objects.
+     */
+    private ObservableList<Result> readFile() {
+        ObservableList<Result> fileOutput = FXCollections.observableArrayList();
+        try (BufferedReader br = new BufferedReader(new FileReader(this.file))) {
+            String line = br.readLine();
+            while (line != null) {
+                String[] temp = line.split(", ");
+                fileOutput.add(0, new Result(temp[0], temp[1], temp[2], temp[3]));
+                line = br.readLine();
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+            clearHistory(new ActionEvent());
+        } catch (IOException e) {
+            e.printStackTrace();
+            clearHistory(new ActionEvent());
+        }
+        return fileOutput;
     }
 
 
@@ -151,10 +199,44 @@ public class FXMLNumConverterController implements Initializable {
                 saveToFile(this.file, this.data);
             }
         } catch (InvalidInputException ex) {
-            // todo
+            showMessage("Error", ex.getMessage());
+        } catch (StringIndexOutOfBoundsException | NumberFormatException ex) {
+            showMessage("Error", "Invalid Input");
         } catch (NullPointerException ex) {
-            // todo invalid base input (not selected)
+            showMessage("Error", "Invalid base as input");
         }
+    }
+
+    @FXML
+    public void showTutorial(ActionEvent event) {
+        showMessage("Description", TUTORIAL_DESCR);
+    }
+
+    private void showMessage(String title, String message) {
+        StackPane stackpane = this.stackPane;
+
+        JFXDialogLayout content = new JFXDialogLayout();
+        content.setHeading(new Text(title));
+        TextFlow flow = new TextFlow(new Text(message));
+        flow.setTextAlignment(TextAlignment.JUSTIFY);
+        content.setBody(flow);
+        content.setMaxWidth(stackpane.getWidth() * 0.9);
+
+        this.stackPane.setDisable(false);
+        JFXDialog dialog = new JFXDialog(this.stackPane, content, JFXDialog.DialogTransition.CENTER);
+        JFXButton button = new JFXButton("Okay");
+        button.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                dialog.close();
+                stackpane.setDisable(true);
+            }
+        });
+        button.setButtonType(com.jfoenix.controls.JFXButton.ButtonType.RAISED);
+        button.setPrefHeight(32);
+//        button.setStyle(dialogBtnStyle);
+        content.setActions(button);
+        dialog.show();
     }
 
     private void saveToFile(File file, ObservableList<Result> lst) {
@@ -165,10 +247,9 @@ public class FXMLNumConverterController implements Initializable {
         lstString.append(lst.get(0).getOutput());
 
         try (Writer outputStream = new BufferedWriter(new FileWriter(file, true))) {
-            outputStream.write(lstString+ "\n");
+            outputStream.write(lstString + "\n");
         } catch (IOException e) {
-            System.out.println("error");
-            // todo
+            e.printStackTrace();
         }
     }
 
@@ -191,7 +272,16 @@ public class FXMLNumConverterController implements Initializable {
 
     @FXML
     void clearHistory(ActionEvent event) {
-
+        PrintWriter writer = null;
+        try {
+            writer = new PrintWriter(file);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        writer.print("");
+        writer.close();
+        this.data.clear();
+        tableResult.setItems(FXCollections.observableArrayList());
     }
 
     @FXML
@@ -201,6 +291,24 @@ public class FXMLNumConverterController implements Initializable {
 
     @FXML
     void explainConversion(ActionEvent event) {
+        openWebpage("https://www.electronics-tutorials.ws/binary/bin_2.html");
+    }
 
+    @FXML
+    void openRepo(ActionEvent event) {
+        openWebpage("https://github.com/derMacon/NumConverter");
+    }
+
+    /**
+     * Opens a given URL in the users default browser
+     *
+     * @param url url to open in the browser
+     */
+    private void openWebpage(String url) {
+        try {
+            Desktop.getDesktop().browse(new URI(url));
+        } catch (IOException | URISyntaxException e) {
+            showMessage("Error", e.getMessage());
+        }
     }
 }
