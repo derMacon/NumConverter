@@ -1,7 +1,7 @@
 # NumConverter
 Converter between different numeral systems. Is able to convert any system reaching from the binary system up to base62. To execute the programm build or download one of the following jar files:
 - Headless: https://github.com/derMacon/NumConverter/blob/feature/otherDocs/builds/NumConverterHeadless.jar
-- JavaFX Gui: todo insert link
+- JavaFX Gui: https://github.com/derMacon/NumConverter/blob/master/otherDocs/builds/NumConverterJavaFX.jar
 
  Execute it with the terminal using following command: 
 `java -jar [Name of the file].jar`
@@ -25,9 +25,7 @@ e.g. decimal to binary with blocksize 8 -> 10 2 8:
 ```
 
 ### Current state of the gui: 
-<p align="indent">
-  <img src="https://github.com/derMacon/NumConverter/blob/feature/otherDocs/img/screenshot2402.png"/>
-</p>
+<img src="https://github.com/derMacon/NumConverter/blob/master/otherDocs/img/screenshot2602Dark.png"/> <img src="https://github.com/derMacon/NumConverter/blob/master/otherDocs/img/screenshot2602Light.png" hspace="20"/>
 
 ### Credits (useful websites):
 - Two's complement: https://www.exploringbinary.com/twos-complement-converter/
