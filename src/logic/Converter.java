@@ -71,7 +71,7 @@ public class Converter {
      * @param num number to convert, is already splitted up into the different digits.
      * @return number in the target numeral system
      */
-    private List<Alphabet> convList(List<Alphabet> num) {
+    private List<Alphabet> convList(List<Alphabet> num) throws InvalidNumException {
         return convFromDec(convToDec(num));
     }
 
@@ -81,10 +81,16 @@ public class Converter {
      * @param num number to convert, is already splitted up into the different digits.
      * @return decimal number of the same value as the input num
      */
-    private int convToDec(List<Alphabet> num) {
+    private int convToDec(List<Alphabet> num) throws InvalidNumException {
         int res = 0;
+        int currOrdinalValue;
         for (int i = 0; i < num.size(); i++) {
-            res += Math.pow(mode.getSourceBase(), num.size() - i - 1) * num.get(i).ordinal();
+            currOrdinalValue = num.get(i).ordinal();
+            if(currOrdinalValue < mode.getSourceBase()) {
+                res += Math.pow(mode.getSourceBase(), num.size() - i - 1) * num.get(i).ordinal();
+            } else {
+                throw new InvalidNumException("Input number contains digit greater than source base.");
+            }
         }
         return res;
     }
@@ -156,7 +162,7 @@ public class Converter {
      * @param out number to be incremented
      * @return incremented number
      */
-    private List<Alphabet> incrementNum(List<Alphabet> out) {
+    private List<Alphabet> incrementNum(List<Alphabet> out) throws InvalidNumException {
         if (convToDec(out) == 0) {
             out.add(0, Alphabet.one);
         }

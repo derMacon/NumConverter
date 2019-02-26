@@ -22,7 +22,7 @@ public class JavaFXMain extends Application {
         primaryStage.setMaxWidth(500);
         primaryStage.setMinHeight(475);
         primaryStage.setMinWidth(330);
-        primaryStage.getIcons().add(new Image("javaFX" + File.separator + "converterIcon.png"));
+        primaryStage.getIcons().add(new Image("javaFX/converterIcon.png"));
         primaryStage.show();
     }
 

@@ -183,10 +183,12 @@ public class FXMLNumConverterController implements Initializable {
     public void calc(KeyEvent e) {
         try {
             if (e.getCode().equals(KeyCode.ENTER)) {
+                // Gather input
                 int srcBase = this.cmbBxSource.getSelectionModel().getSelectedIndex() + 2;
                 int trgtBase = this.cmbBxTarget.getSelectionModel().getSelectedIndex() + 2;
                 int blockSize = Integer.parseInt(removePrefix(this.txtFldBlock.getText()));
 
+                // generate output
                 converter.setMode(new Mode(srcBase, trgtBase, blockSize));
                 data.add(0, new Result(this.cmbBxSource.getSelectionModel().getSelectedItem().getText(),
                         removePrefix(this.txtFldInput.getText()),
@@ -194,7 +196,10 @@ public class FXMLNumConverterController implements Initializable {
                         converter.conv(removePrefix(this.txtFldInput.getText()))));
                 tableResult.getItems().setAll(data);
 
+                // udate file / gui
                 saveToFile(this.file, this.data);
+                this.txtFldInput.setText(INPUT_PREFIX);
+                this.txtFldInput.positionCaret(INPUT_PREFIX.length());
             }
         } catch (InvalidInputException ex) {
             showMessage("Error", ex.getMessage());
@@ -235,6 +240,7 @@ public class FXMLNumConverterController implements Initializable {
                 stackpane.setDisable(true);
             }
         });
+
         button.setButtonType(com.jfoenix.controls.JFXButton.ButtonType.RAISED);
         button.setPrefHeight(32);
         content.setActions(button);
@@ -274,7 +280,7 @@ public class FXMLNumConverterController implements Initializable {
         } else if (str.startsWith(BLOCK_PREFIX)) {
             temp = str.substring(BLOCK_PREFIX.length());
         }
-        return temp;
+        return temp.trim();
     }
 
     @FXML

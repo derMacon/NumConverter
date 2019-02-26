@@ -78,7 +78,7 @@
                               <Insets left="3.0" />
                            </GridPane.margin>
                         </JFXTextField>
-                        <JFXTextField fx:id="txtFldBlock" depthTest="ENABLE" maxWidth="1000.0" minWidth="77.0" prefHeight="31.0" prefWidth="1000.0" promptText="Blocksize" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                        <JFXTextField fx:id="txtFldBlock" depthTest="ENABLE" maxWidth="1000.0" minWidth="77.0" onKeyPressed="#calc" prefHeight="31.0" prefWidth="1000.0" promptText="Blocksize" GridPane.columnIndex="1" GridPane.rowIndex="1">
                            <tooltip>
                               <Tooltip text="Minimal digit count of the output (Blocksize). If necessary a prefix of zeros will be added." />
                            </tooltip>

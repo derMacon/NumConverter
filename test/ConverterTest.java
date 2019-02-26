@@ -54,6 +54,12 @@ public class ConverterTest {
         assertEquals("100", c.conv("256"));
     }
 
+    @Test (expected = InvalidNumException.class)
+    public void testNumNotInAlphabet() throws InvalidNumException {
+        Converter c = new Converter(new Mode(4, 10, 1));
+        c.conv("4");
+    }
+
 
     // --- two's complement ---
     @Test
