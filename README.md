@@ -25,9 +25,7 @@ e.g. decimal to binary with blocksize 8 -> 10 2 8:
 ```
 
 ### Current state of the gui: 
-<p align="indent">
-  <img src="https://github.com/derMacon/NumConverter/blob/feature/otherDocs/img/screenshot2402.png"/>
-</p>
+<img src="https://github.com/derMacon/NumConverter/blob/master/otherDocs/img/screenshot2602Dark.png"/> <img src="https://github.com/derMacon/NumConverter/blob/master/otherDocs/img/screenshot2602Light.png" hspace="30"/>
 
 ### Credits (useful websites):
 - Two's complement: https://www.exploringbinary.com/twos-complement-converter/
