@@ -19,6 +19,18 @@ public class ConverterTest {
     }
 
     @Test
+    public void testBinToHex_onlyPos() throws InvalidNumException {
+        Converter c = new Converter(new Mode());
+        assertEquals("0", c.conv("00000000"));
+        assertEquals("1", c.conv("00000001"));
+        assertEquals("A", c.conv("00001010"));
+//        assertEquals("F", c.conv("15"));
+//        assertEquals("10", c.conv("16"));
+        assertEquals("FF", c.conv("11111111"));
+        assertEquals("100", c.conv("100000000"));
+    }
+
+    @Test
     public void testDecToBin_onlyPos_WithoutBlockSize() throws InvalidNumException {
         Converter c = new Converter(new Mode(10, 2, 1));
         assertEquals("0", c.conv("0"));
