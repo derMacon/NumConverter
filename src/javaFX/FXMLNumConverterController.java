@@ -164,12 +164,10 @@ public class FXMLNumConverterController implements Initializable {
         for (int i = 2; i < Mode.MAX_BASE; i++) {
             this.cmbBxSource.getItems().add(new Label("Base-" + i));
         }
-        // todo remove before final commit
         this.cmbBxSource.getSelectionModel().select(8);
         for (int i = 2; i < Mode.MAX_BASE; i++) {
             this.cmbBxTarget.getItems().add(new Label("Base-" + i));
         }
-        // todo remove before final commit
         this.cmbBxTarget.getSelectionModel().select(0);
     }
 
